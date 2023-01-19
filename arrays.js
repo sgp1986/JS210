@@ -273,3 +273,150 @@ console.log(arraysEqual([1, 'hi', true], [1, 'hi', false]));      // false
 console.log(arraysEqual([1, 'hi', true], [1, 'hello', true]));    // false
 console.log(arraysEqual([1, 'hi', true], [2, 'hi', true]));       // false
 
+/*
+write a function named sortDescending
+accepts one argument
+  array of numbers
+returns new array of numbers sorted in desc order
+do not alter original array
+*/
+
+const sortDescending = (arr) => {
+  let arrCopy = arr.slice();
+  return arrCopy.sort((a, b) => b - a);
+}
+
+let array = [23, 4, 16, 42, 8, 15];
+let result = sortDescending(array);
+console.log(result);
+console.log(array);
+
+/*
+write a function named matrixSums
+accepts one argument
+  array of arrays of numbers
+return new array containing sums of each sub array
+*/
+
+function matrixSums(arr) {
+  let sums = [];
+
+  for (let arrIndex = 0; arrIndex < arr.length; arrIndex++) {
+    let total = 0;
+    let subArr = arr[arrIndex];
+
+    for (let subIndex = 0; subIndex < subArr.length; subIndex++) {
+      total += subArr[subIndex];
+    }
+
+    sums.push(total);
+  }
+
+  return sums;
+}
+
+console.log(matrixSums([[2, 8, 5], [12, 48, 0], [12]]));  // returns [15, 60, 12]
+
+/*
+write a function named uniqueElements
+accepts one argument
+  array of numbers
+return a new array with duplicate elements removed
+*/
+
+function uniqueElements(arr) {
+  let noDuplicates = [];
+
+  for (let index = 0; index < arr.length; index++) {
+    let currentNumber = arr[index];
+    let unique = true;
+
+    for (let i = 0; i < noDuplicates.length; i++) {
+      if (index === i) {
+        continue;
+      }
+      else if (currentNumber === noDuplicates[i]) {
+        unique = false;
+      }
+    }
+
+    if (unique) {
+      noDuplicates.push(currentNumber);
+    }
+  }
+
+  return noDuplicates;
+}
+
+/*
+LS Solution
+function uniqueElements(arr) {
+  let uniques = [];
+  let len = arr.length;
+
+  for (let index = 0; index < len; index += 1) {
+    if (uniques.indexOf(arr[index]) === -1) {
+      uniques.push(arr[index]);
+    }
+  }
+
+  return uniques;
+}
+*/
+
+console.log(uniqueElements([1, 2, 4, 3, 4, 1, 5, 4]));  // returns [1, 2, 4, 3, 5]
+
+/*
+function selects numbers that only appear once
+function uniqueElements(arr) {
+  let noDuplicates = [];
+
+  for (let index = 0; index < arr.length; index++) {
+    let currentNumber = arr[index];
+    let unique = true;
+
+    for (let i = 0; i < arr.length; i++) {
+      if (index === i) {
+        continue;
+      }
+      else if (currentNumber === arr[i]) {
+        unique = false;
+      }
+    }
+
+    if (unique) {
+      noDuplicates.push(currentNumber);
+    }
+  }
+
+  return noDuplicates;
+}
+*/
+
+/*
+write a function named missing
+accepts one argument
+  array of numbers sorted
+return new array that includes all missing integers in order between first and last elements of the argument
+*/
+
+function missing(arr) {
+  let missingNumbers = [];
+  let len = arr.length;
+  let first = arr[0];
+  let last = arr[len - 1];
+
+  for (let num = first + 1 ; num < last; num++) {
+    if (arr.indexOf(num) === -1) {
+      missingNumbers.push(num);
+    }
+  }
+
+  return missingNumbers;
+}
+
+console.log('Missing');
+console.log(missing([-3, -2, 1, 5]));                  // [-1, 0, 2, 3, 4]
+console.log(missing([1, 2, 3, 4]));                    // []
+console.log(missing([1, 5]));                          // [2, 3, 4]
+console.log(missing([6]));                             // []
